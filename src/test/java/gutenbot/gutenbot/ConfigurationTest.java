@@ -9,12 +9,29 @@ public class ConfigurationTest {
 
 	@Test
 	public void test() {
+		
+		System.out.println("test domain config");
+
 
 		GutenBotConfiguration conf = new GutenBotConfiguration("domainconfigurations");
 		
 		for(DomainConfiguration domainConf:conf.getDomainConfigurations()) {
 			System.out.println(domainConf.getName());
 		}
+	}
+	
+	@Test
+	public void rssTest(){
+		
+		System.out.println("test urls");
+
+		GutenBotConfiguration conf = new GutenBotConfiguration("domainconfigurations");
+		for(DomainConfiguration domainConf:conf.getDomainConfigurations()) {
+			for(String url:domainConf.getRssURLs()){
+				System.out.println(url);
+			}
+		}
+
 	}
 
 }

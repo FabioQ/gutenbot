@@ -28,7 +28,6 @@ public class GutenBotConfiguration {
 						configurations.add(configuration);
 					}
 				}
-				
 			}
 		}else{
 			logger.error("Invalid configurations directory");
