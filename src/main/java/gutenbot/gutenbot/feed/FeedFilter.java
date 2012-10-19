@@ -15,16 +15,22 @@ public class FeedFilter {
 	String registerPath;
 	Date defaultStartDate;
 
+	
+	
 	public FeedFilter(String domainName, String registerPath) {
 		this.domainName = domainName;
 		this.registerPath = registerPath;
 	}
 
+	
+	
 	public void setDefaultStartDate(Date defaultStartDate) {
 		this.defaultStartDate = defaultStartDate;
 	}
 
-	LinkedList<SyndEntry> getSyndEntryFilteredList(String feedURL) {
+	
+	
+	public LinkedList<SyndEntry> getSyndEntryFilteredList(String feedURL) {
 		LinkedList<SyndEntry> list = new LinkedList<SyndEntry>();
 		
 		try {
@@ -32,10 +38,12 @@ public class FeedFilter {
 
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = input.build(new XmlReader(feedSource));
-
+			Date lastDate = getLastDate();
+			
 			for (Object o : feed.getEntries()) {
 				SyndEntry entry = (SyndEntry) o;
-				if(entry.getPublishedDate().after(getLastDate())){
+				
+				if(lastDate == null || entry.getPublishedDate().after(lastDate)){
 					list.add(entry);
 				}
 			}
@@ -48,6 +56,8 @@ public class FeedFilter {
 		return list;
 	}
 
+	
+	
 	protected Date getLastDate() {
 		
 		Date retval = null;
@@ -55,11 +65,13 @@ public class FeedFilter {
 		if(defaultStartDate != null){
 			retval = defaultStartDate;
 		}else{
-			//TODO read from file
+			retval = getLastDateFromFile();
 		}
 		
-		return null;
+		return retval;
 	}
+	
+	
 	
 	protected Date getLastDateFromFile() {
 		return null;
