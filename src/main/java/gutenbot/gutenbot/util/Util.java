@@ -5,10 +5,6 @@ import java.io.IOException;
 
 public class Util {
 
-	public static String tail(File file) {
-		return tail(file, 1);
-	}
-
 	public static String tail(File file, int lines) {
 		java.io.RandomAccessFile fileHandler = null;
 		try {
@@ -61,6 +57,44 @@ public class Util {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static String readLastLine( File file ) {
+	    try {
+	        java.io.RandomAccessFile fileHandler = new java.io.RandomAccessFile( file, "r" );
+	        long fileLength = file.length() - 1;
+	        StringBuilder sb = new StringBuilder();
+	 
+	        for( long filePointer = fileLength; filePointer != -1; filePointer-- ) {
+	            fileHandler.seek( filePointer );
+	            int readByte = fileHandler.readByte();                
+	 
+	            if( readByte == 0xA ) {
+	                if( filePointer == fileLength ) {
+	                    continue;
+	                } else {
+	                    break;
+	                }
+	            } else if( readByte == 0xD ) {
+	                if( filePointer == fileLength - 1 ) {
+	                    continue;
+	                } else {
+	                    break;
+	                }                    
+	            }
+	 
+	            sb.append( ( char ) readByte );
+	        }
+	 
+	        String lastLine = sb.reverse().toString();
+	        return lastLine;
+	    } catch( java.io.FileNotFoundException e ) {
+	        e.printStackTrace();
+	        return null;
+	    } catch( java.io.IOException e ) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 
 }

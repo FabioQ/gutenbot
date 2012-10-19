@@ -33,7 +33,7 @@ public class FeedRegister {
 	
 	public Date getDate() {
 		Date date = null; 
-		String lastLine = Util.tail(register);
+		String lastLine = Util.readLastLine(register);
 		Scanner sc = new Scanner(lastLine);
 		if(sc.hasNextLong()){
 			date = new Date (sc.nextLong());

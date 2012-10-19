@@ -12,10 +12,10 @@ public class FeedRegisterTest {
 	public void test() {
 		FeedRegister register = new FeedRegister("feedregister", "aaa");
 
-//		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			register.setDate(new Date());
-			System.out.println(": "+register.getDate().toString());
-//		}
+			System.out.println(i+": "+register.getDate().toString());
+		}
 	}
 
 }
