@@ -16,6 +16,7 @@ public class DomainConfiguration {
 	File configurationFile;
 	LinkedList<String> urls = new LinkedList<String>();
 	boolean valid;
+	String destinationName;
 
 	public DomainConfiguration(File configurationFile) {
 
@@ -26,11 +27,14 @@ public class DomainConfiguration {
 		SAXReader reader = new SAXReader();
 		try {
 			Document document = reader.read(new FileInputStream(configurationFile));
-			List list = document.selectNodes("/feeds/url");
+			List list = document.selectNodes("/gbconfig/feeds/url");
 			for(Object o:list){
 				Element url = (Element) o;
 				urls.add(url.getText());
 			}
+			
+			destinationName = ( (Element) document.selectSingleNode("/gbconfig/destination/name") ).getText();
+					
 			valid = true;
 		} catch (Exception e) {
 			valid = false;

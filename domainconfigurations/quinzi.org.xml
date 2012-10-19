@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gbconfig>
+	<destination>
+		<name>quinzi website</name>
+	</destination>
+	<feeds>
+		<url>http://www.gazzetta.it/rss/Calcio.xml</url>
+	</feeds>
+</gbconfig>
