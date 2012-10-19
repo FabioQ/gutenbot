@@ -26,7 +26,7 @@ public class ConfigurationTest {
 		GutenBotConfiguration conf = new GutenBotConfiguration("domainconfigurations");
 		for(DomainConfiguration domainConf:conf.getDomainConfigurations()) {
 			System.out.println("configuration: "+domainConf.getName());
-			for(String url:domainConf.getRssURLs()){
+			for(String url:domainConf.getFeedURLs()){
 				System.out.println(url);
 			}
 		}

@@ -43,7 +43,7 @@ public class DomainConfiguration {
 
 	}
 
-	public LinkedList<String> getRssURLs() {
+	public LinkedList<String> getFeedURLs() {
 		return urls;
 	}
 
