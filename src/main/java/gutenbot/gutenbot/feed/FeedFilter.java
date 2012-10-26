@@ -1,5 +1,6 @@
 package gutenbot.gutenbot.feed;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.LinkedList;
@@ -38,7 +39,7 @@ public class FeedFilter {
 
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = input.build(new XmlReader(feedSource));
-			Date lastDate = getLastDate();
+			Date lastDate = getLastDate(feedURL);
 			
 			for (Object o : feed.getEntries()) {
 				SyndEntry entry = (SyndEntry) o;
@@ -58,14 +59,18 @@ public class FeedFilter {
 
 	
 	
-	protected Date getLastDate() {
+	protected Date getLastDate(String feedUrl) {
 		
 		Date retval = null;
 		
 		if(defaultStartDate != null){
 			retval = defaultStartDate;
 		}else{
-			retval = getLastDateFromFile();
+			retval = getLastDateFromFile(feedUrl);
+		}
+		
+		if(retval == null){
+			retval = new Date(0); // long time ago
 		}
 		
 		return retval;
@@ -73,8 +78,24 @@ public class FeedFilter {
 	
 	
 	
-	protected Date getLastDateFromFile() {
-		return null;
+	protected Date getLastDateFromFile(String feedUrl) {
+		
+		FeedRegister register = null;
+		
+		try {
+			register = new FileFeedRegister(registerPath, generateFeedId(domainName, feedUrl));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return register.getDate();
+	}
+	
+	
+	
+	protected String generateFeedId(String domainName, String feedUrl){
+		return "domainName " + feedUrl.replaceAll(":", "_").replaceAll("/", "_");
 	}
 
 }
