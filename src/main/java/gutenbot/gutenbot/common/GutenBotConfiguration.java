@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 public class GutenBotConfiguration {
 	
 	Logger logger = Logger.getLogger(GutenBotConfiguration.class);
-	LinkedList<DomainConfiguration> configurations = new LinkedList<DomainConfiguration>();
+	LinkedList<DestinationConfiguration> configurations = new LinkedList<DestinationConfiguration>();
 	File dir;
 	
 	public GutenBotConfiguration(String directory) {
@@ -23,7 +23,7 @@ public class GutenBotConfiguration {
 				
 				if(configurationPath.endsWith("xml")) {
 					File configurationFile = new File(configurationPath);
-					DomainConfiguration configuration = new DomainConfiguration(configurationFile);
+					DestinationConfiguration configuration = new DestinationConfiguration(configurationFile);
 					if(configuration.isValid()){
 						configurations.add(configuration);
 					}
@@ -35,7 +35,7 @@ public class GutenBotConfiguration {
 		
 	}
 	
-	public LinkedList<DomainConfiguration> getDomainConfigurations() {
+	public LinkedList<DestinationConfiguration> getDomainConfigurations() {
 		return configurations;
 	}
 

@@ -10,15 +10,15 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-public class DomainConfiguration {
+public class DestinationConfiguration {
 
-	Logger logger = Logger.getLogger(DomainConfiguration.class);
+	Logger logger = Logger.getLogger(DestinationConfiguration.class);
 	File configurationFile;
 	LinkedList<String> urls = new LinkedList<String>();
 	boolean valid;
 	String destinationName;
 
-	public DomainConfiguration(File configurationFile) {
+	public DestinationConfiguration(File configurationFile) {
 
 		logger.info("loading configuration from: " + configurationFile.getName());
 

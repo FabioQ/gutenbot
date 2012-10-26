@@ -17,15 +17,15 @@ public class FeedRegisterTest {
 		try {
 			register = new FileFeedRegister("feedregister", "test.txt");
 			
-			if(register.getDate() == null){
+			if(register.getLastDate() == null){
 				System.out.println("empty file");
 			}else{
-					System.out.println("last date: "+register.getDate());
+					System.out.println("last date: "+register.getLastDate());
 			}
 			
 			for (int i = 0; i < 3; i++) {
-				register.setDate(new Date());
-				System.out.println(i+": "+register.getDate().toString());
+				register.setLastDate(new Date());
+				System.out.println(i+": "+register.getLastDate().toString());
 			}
 		} catch (IOException e) {
 			System.out.println("Impossible write this file");

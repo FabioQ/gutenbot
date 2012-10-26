@@ -4,8 +4,8 @@ import java.util.Date;
 
 public interface FeedRegister {
 
-	public abstract Date getDate();
+	public abstract Date getLastDate();
 
-	public abstract void setDate(Date date);
+	public abstract void setLastDate(Date date);
 
 }

@@ -1,6 +1,6 @@
 package gutenbot.gutenbot;
 
-import gutenbot.gutenbot.common.DomainConfiguration;
+import gutenbot.gutenbot.common.DestinationConfiguration;
 import gutenbot.gutenbot.common.GutenBotConfiguration;
 
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class ConfigurationTest {
 		System.out.println("test domain config");
 
 		GutenBotConfiguration conf = new GutenBotConfiguration("domainconfigurations");
-		for(DomainConfiguration domainConf:conf.getDomainConfigurations()) {
+		for(DestinationConfiguration domainConf:conf.getDomainConfigurations()) {
 			System.out.println(domainConf.getName());
 		}
 	}
@@ -24,7 +24,7 @@ public class ConfigurationTest {
 		System.out.println("test urls");
 
 		GutenBotConfiguration conf = new GutenBotConfiguration("domainconfigurations");
-		for(DomainConfiguration domainConf:conf.getDomainConfigurations()) {
+		for(DestinationConfiguration domainConf:conf.getDomainConfigurations()) {
 			System.out.println("configuration: "+domainConf.getName());
 			for(String url:domainConf.getFeedURLs()){
 				System.out.println(url);

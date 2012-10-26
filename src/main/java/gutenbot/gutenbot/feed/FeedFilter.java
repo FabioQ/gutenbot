@@ -2,9 +2,14 @@ package gutenbot.gutenbot.feed;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.google.common.collect.Lists;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
@@ -12,15 +17,31 @@ import com.sun.syndication.io.XmlReader;
 
 public class FeedFilter {
 
-	String domainName;
+	Logger logger = Logger.getLogger(FeedFilter.class);
+	
+	String destinationName;
 	String registerPath;
+	String feedUrl;
+	FeedRegister register = null;
 	Date defaultStartDate;
-
+	LinkedList<SyndEntry> list = new LinkedList<SyndEntry>();
 	
-	
-	public FeedFilter(String domainName, String registerPath) {
-		this.domainName = domainName;
+	public FeedFilter(String destinationName, String registerPath, String feedUrl) {
+		this.destinationName = destinationName;
 		this.registerPath = registerPath;
+		this.feedUrl = feedUrl;
+		
+		try {
+			register = new FileFeedRegister(registerPath, generateFeedId(destinationName, feedUrl));
+		} catch (IOException e) {
+			logger.error("Error creating register (destination="+destinationName+", path="+registerPath+")", e);
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public boolean isInstantiated(){
+		return register == null ? true : false;
 	}
 
 	
@@ -31,26 +52,30 @@ public class FeedFilter {
 
 	
 	
-	public LinkedList<SyndEntry> getSyndEntryFilteredList(String feedURL) {
-		LinkedList<SyndEntry> list = new LinkedList<SyndEntry>();
+	public LinkedList<SyndEntry> getSyndEntryFilteredList() {
+		list.clear();
 		
 		try {
-			URL feedSource = new URL(feedURL);
+			URL feedSource = new URL(feedUrl);
 
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = input.build(new XmlReader(feedSource));
-			Date lastDate = getLastDate(feedURL);
+			Date lastDate = getLastDate(feedUrl);
 			
-			for (Object o : feed.getEntries()) {
-				SyndEntry entry = (SyndEntry) o;
+			List<SyndEntry> entries = (List<SyndEntry>) feed.getEntries();
+			for (SyndEntry entry : entries) {
 				
 				if(lastDate == null || entry.getPublishedDate().after(lastDate)){
 					list.add(entry);
+					setLastDate(entry.getPublishedDate());
+					logger.debug("entry ADDED:\t"+entry.getPublishedDate().toString());
+				}else{
+					logger.debug("entry IGNORED:\t"+entry.getPublishedDate().toString());
 				}
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			logger.error("Error reading article",e);
 			e.printStackTrace();
 		}
 
@@ -66,7 +91,7 @@ public class FeedFilter {
 		if(defaultStartDate != null){
 			retval = defaultStartDate;
 		}else{
-			retval = getLastDateFromFile(feedUrl);
+			retval = register.getLastDate();
 		}
 		
 		if(retval == null){
@@ -76,26 +101,12 @@ public class FeedFilter {
 		return retval;
 	}
 	
-	
-	
-	protected Date getLastDateFromFile(String feedUrl) {
-		
-		FeedRegister register = null;
-		
-		try {
-			register = new FileFeedRegister(registerPath, generateFeedId(domainName, feedUrl));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return register.getDate();
+	protected void setLastDate(Date lastDate){
+		register.setLastDate(lastDate);
 	}
 	
-	
-	
 	protected String generateFeedId(String domainName, String feedUrl){
-		return "domainName " + feedUrl.replaceAll(":", "_").replaceAll("/", "_");
+		return domainName+ " " + feedUrl.replaceAll(":", "_").replaceAll("/", "_")+".txt";
 	}
 
 }

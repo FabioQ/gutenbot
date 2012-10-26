@@ -36,7 +36,7 @@ public class FileFeedRegister implements FeedRegister {
 	 * @see gutenbot.gutenbot.feed.Register#getDate()
 	 */
 	@Override
-	public Date getDate() {
+	public Date getLastDate() {
 		Date date = null; 
 		String lastLine = Util.readLastLine(register);
 		Scanner sc = new Scanner(lastLine);
@@ -50,14 +50,13 @@ public class FileFeedRegister implements FeedRegister {
 	 * @see gutenbot.gutenbot.feed.Register#setDate(java.util.Date)
 	 */
 	@Override
-	public void setDate(Date date){
+	public void setLastDate(Date date){
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(register, true)); 
 			out.write(" "+date.getTime()+" "+date.toString()+"\n"); 
-			out.close(); 
+			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error", e);
+			logger.error("Error setting last date", e);
 			e.printStackTrace();
 		}
 	}
