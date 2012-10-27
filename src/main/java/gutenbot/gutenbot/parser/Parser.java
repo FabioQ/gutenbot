@@ -1,4 +1,4 @@
-package gutenbot.gutenbot.parsers;
+package gutenbot.gutenbot.parser;
 
 import gutenbot.gutenbot.dto.Article;
 
