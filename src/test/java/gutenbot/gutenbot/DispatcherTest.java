@@ -7,6 +7,7 @@ import gutenbot.gutenbot.feed.FeedRegister;
 
 import org.junit.Test;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 public class DispatcherTest {
 
 	@Test
-	public void dispatcherTest() {
+	public void dispatcherTest() throws URISyntaxException {
 		//initialization phase
 		Destination destination = null;
 		String feedURL = "http://www.gazzetta.it/rss/Calcio.xml";
