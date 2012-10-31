@@ -28,7 +28,7 @@ public class DispatcherTest {
 		System.out.println("Stampo il titolo del primo elemento della lista di feed per testare la creazione dell'oggetto Feed:");
 		System.out.println(feedObj.getSyndEntryList().get(0).getTitle());
 		//TODO parser selection phase
-		Dispatcher dispatcher = new Dispatcher(feedObj);
+		Dispatcher dispatcher = new Dispatcher();
 	}
 
 	private LinkedList<SyndEntry> CreateSyndEntry(){

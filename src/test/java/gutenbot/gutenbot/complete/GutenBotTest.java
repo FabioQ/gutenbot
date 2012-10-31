@@ -1,9 +1,13 @@
 package gutenbot.gutenbot.complete;
 
+import java.net.URISyntaxException;
+
 import gutenbot.gutenbot.common.DestinationConfiguration;
 import gutenbot.gutenbot.common.GutenBotConfiguration;
 import gutenbot.gutenbot.feed.FeedFilter;
 import gutenbot.gutenbot.parser.Parser;
+import gutenbot.gutenbot.dispatcher.Dispatcher;
+import gutenbot.gutenbot.dto.Feed;
 
 import org.junit.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -24,6 +28,12 @@ public class GutenBotTest {
 				feedFilter.getSyndEntryFilteredList();
 			}
 		}
+	}
+	
+	@Test
+	public void testDispatcher() throws URISyntaxException{
+		Dispatcher dispatcher = new Dispatcher();
+		System.out.println(dispatcher.getDomain());
 	}
 
 	@Test
