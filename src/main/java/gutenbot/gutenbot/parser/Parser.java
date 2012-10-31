@@ -1,9 +1,15 @@
 package gutenbot.gutenbot.parser;
 
-import gutenbot.gutenbot.dto.Article;
+import java.net.URISyntaxException;
 
-public interface Parser {
+import gutenbot.gutenbot.dto.Article;
+import gutenbot.gutenbot.dto.Feed;
+import gutenbot.gutenbot.dispatcher.Dispatcher;
+
+public class Parser {
 	
-	Article parse();
+	public Parser(Feed feed, String domain) throws URISyntaxException{
+		
+	}
 
 }

@@ -1,6 +1,7 @@
 package gutenbot.gutenbot.dispatcher;
 
 import gutenbot.gutenbot.dto.Feed;
+import gutenbot.gutenbot.parser.Parser;
 import java.util.LinkedList;
 import com.sun.syndication.feed.synd.SyndEntry;
 import java.util.regex.*;
@@ -16,8 +17,11 @@ public class Dispatcher {
 		URI uri = new URI(toDispatch.getFeedURL());
 		System.out.println(uri);
 		Matcher m = p.matcher(uri.getHost());
+		String domain = null;
         if (m.matches()) {
-            System.out.println(m.group(1));
-        }	
+            domain = m.group(1);
+        }
+        Parser toparse = new Parser(feed, domain);
+        
 	}
 }
