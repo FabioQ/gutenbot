@@ -21,7 +21,5 @@ public class Dispatcher {
         if (m.matches()) {
             domain = m.group(1);
         }
-        Parser toparse = new Parser(feed, domain);
-        
 	}
 }

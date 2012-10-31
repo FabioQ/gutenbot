@@ -29,9 +29,9 @@ public class GutenBotTest {
 	@Test
 	public void testParsers(){
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
-		Parser p1 = (Parser) ctx.getBean("corriere");
+		Parser p1 = (Parser) ctx.getBean("corriereobjects.it");
 		p1.parse();
-		Parser p2 = (Parser) ctx.getBean("gazzetta");
+		Parser p2 = (Parser) ctx.getBean("gazzetta.it");
 		p2.parse();
 
 	}
