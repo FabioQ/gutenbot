@@ -39,10 +39,7 @@ public class GutenBotTest {
 	@Test
 	public void testParsers(){
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
-		Parser p1 = (Parser) ctx.getBean("corriereobjects.it");
-		p1.parse();
-		Parser p2 = (Parser) ctx.getBean("gazzetta.it");
-		p2.parse();
-
+		Parser gazzetta = (Parser) ctx.getBean("gazzetta.it");
+		gazzetta.parse("http://www.gazzetta.it/Calcio/Squadre/Juventus/20-10-2012/juve-napoli-sfida-totale-rivincite-sospetti-912961817332.shtml");
 	}
 }
