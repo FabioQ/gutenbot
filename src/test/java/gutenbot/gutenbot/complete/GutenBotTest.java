@@ -1,5 +1,6 @@
 package gutenbot.gutenbot.complete;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import gutenbot.gutenbot.common.DestinationConfiguration;
@@ -10,6 +11,7 @@ import gutenbot.gutenbot.dispatcher.Dispatcher;
 import gutenbot.gutenbot.dto.Feed;
 
 import org.junit.Test;
+import org.springframework.beans.BeansException;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class GutenBotTest {
@@ -37,7 +39,7 @@ public class GutenBotTest {
 	}
 
 	@Test
-	public void testParsers(){
+	public void testParsers() throws BeansException, IOException {
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
 		Parser gazzetta = (Parser) ctx.getBean("gazzetta.it");
 		gazzetta.parse("http://www.gazzetta.it/Calcio/Squadre/Juventus/20-10-2012/juve-napoli-sfida-totale-rivincite-sospetti-912961817332.shtml");
