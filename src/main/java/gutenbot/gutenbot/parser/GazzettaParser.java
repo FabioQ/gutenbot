@@ -15,10 +15,15 @@ public class GazzettaParser implements Parser {
 		System.out.println("gazzetta!");
         System.out.println("Fetching "+ url);
         Document doc = Jsoup.connect(url).get();
-        Elements links = doc.select("a[href]");
-        for (Element link : links) {
-            System.out.println(link.attr("abs:href"));
+        Elements toCleanArticle = doc.select("div.first-col");
+        //System.out.println(toCleanArticle);
+        Elements RawArticle = toCleanArticle.select("p.p");
+        String ArticleContent = "";
+        for (Element paragraph : RawArticle) {
+        	ArticleContent += paragraph.text();
+        	ArticleContent += " <br> ";
         }
+        System.out.println(ArticleContent);
 		return null;
 	}
 
