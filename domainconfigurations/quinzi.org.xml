@@ -6,5 +6,6 @@
 	</destination>
 	<feeds>
 		<url>http://www.gazzetta.it/rss/Calcio.xml</url>
+		<!-- <url>http://xml.corriereobjects.it/rss/sport.xml</url>  -->
 	</feeds>
 </gbconfig>

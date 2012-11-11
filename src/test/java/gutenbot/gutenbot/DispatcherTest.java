@@ -30,8 +30,16 @@ public class DispatcherTest {
 		//TODO parser selection phase
 		Dispatcher dispatcher = new Dispatcher();
 	}
+	
+	@Test
+	public void testDispatcher() throws URISyntaxException{
+		Dispatcher dispatcher = new Dispatcher();
+		Feed feed = DispatcherTest.createFeed();
+		dispatcher.setFeed(feed);
+		System.out.println(dispatcher.getDomain());
+	}
 
-	private LinkedList<SyndEntry> CreateSyndEntry(){
+	private static LinkedList<SyndEntry> CreateSyndEntry(){
 		List enclosuresA = new ArrayList();
 		enclosuresA.add("http://images2.gazzettaobjects.it/Media/Foto/2012/10/20/combo_365--630x365.jpg");
 		List enclosuresB = new ArrayList();
@@ -49,4 +57,19 @@ public class DispatcherTest {
 		newsList.add(newsB);
 		return newsList;	
 	}
+	
+	//just used for test purpose, create a feed object example to dispatch
+		public static Feed createFeed(){
+			Destination destination = null;
+			String feedURL = "http://www.gazzetta.it/rss/Calcio.xml";
+			LinkedList<SyndEntry> newsList = CreateSyndEntry();
+			//System.out.println("test dispatcher");
+			Feed feedObj = new Feed(feedURL, destination, newsList);
+			//System.out.println("Stampo il titolo del primo elemento della lista di feed per testare la creazione dell'oggetto Feed:");
+			//System.out.println(feedObj.getSyndEntryList().get(0).getTitle());
+			return feedObj;
+		}
+		
+		
+
 }

@@ -63,14 +63,15 @@ public class FeedFilter {
 			Date lastDate = getLastDate(feedUrl);
 			
 			List<SyndEntry> entries = (List<SyndEntry>) feed.getEntries();
+			//TODO ordinare per data
 			for (SyndEntry entry : entries) {
 				
 				if(lastDate == null || entry.getPublishedDate().after(lastDate)){
 					list.add(entry);
 					setLastDate(entry.getPublishedDate());
-					logger.debug("entry ADDED:\t"+entry.getPublishedDate().toString());
+					logger.debug("entry ADDED:\t"+entry.getPublishedDate().toString()+" "+entry.getUri().toString());
 				}else{
-					logger.debug("entry IGNORED:\t"+entry.getPublishedDate().toString());
+					logger.debug("entry IGNORED:\t"+entry.getPublishedDate().toString()+" "+entry.getUri().toString());
 				}
 			}
 

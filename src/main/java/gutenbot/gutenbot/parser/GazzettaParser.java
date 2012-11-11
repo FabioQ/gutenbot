@@ -1,18 +1,21 @@
 package gutenbot.gutenbot.parser;
 
 import gutenbot.gutenbot.dto.Article;
+
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import java.io.IOException;
 
 public class GazzettaParser implements Parser {
 
+	Logger logger = Logger.getLogger(GazzettaParser.class);
+	
 	@Override
 	public Article parse(String url) throws IOException{
-		System.out.println("gazzetta!");
         System.out.println("Fetching "+ url);
         Document doc = Jsoup.connect(url).get();
         Elements toCleanArticle = doc.select("div.first-col");
@@ -23,7 +26,7 @@ public class GazzettaParser implements Parser {
         	ArticleContent += paragraph.text();
         	ArticleContent += " <br> ";
         }
-        System.out.println(ArticleContent);
+        logger.debug("content: "+ArticleContent);
 		return null;
 	}
 

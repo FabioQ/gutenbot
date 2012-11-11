@@ -3,6 +3,7 @@ package gutenbot.gutenbot.dto;
 import java.util.LinkedList;
 
 import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
 
 public class Feed {
 
@@ -29,4 +30,9 @@ public class Feed {
 		return syndEntryList;
 	}
 
+//	public static Feed convertFeed(SyndFeed inputFeed){
+//		Feed outputFeed = new Feed();
+//		return outputFeed;
+//	}
+	
 }
