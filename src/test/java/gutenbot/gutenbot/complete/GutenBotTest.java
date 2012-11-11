@@ -57,12 +57,15 @@ public class GutenBotTest {
 			Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());
 			
 			//parse entries
-			
 			for(Object o:f.getSyndEntryList()){
 				SyndEntry entry = (SyndEntry) o;
 				System.out.println("parsing:\t"+entry.getPublishedDate().toString()+ " - "+entry.getLink());
 				parser.parse(entry.getLink());
 			}
+			
+			//TODO Update the Feed Obj to a complete version
+			
+			//TODO Creating and publishing an article
 			
 			System.out.println("publish");
 		}

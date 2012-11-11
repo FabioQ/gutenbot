@@ -27,6 +27,7 @@ public class GazzettaParser implements Parser {
         	ArticleContent += " <br> ";
         }
         logger.debug("content: "+ArticleContent);
+        //TODO pulire articoli e levare ahref
 		return null;
 	}
 
