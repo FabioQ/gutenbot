@@ -26,7 +26,10 @@ public class GazzettaParser implements Parser {
         	ArticleContent += paragraph.text();
         	ArticleContent += " <br> ";
         }
-        logger.debug("content: "+ArticleContent);
+        if (ArticleContent.length() > 20)	//needed almost 10characters to be a valid article, so we even skip empty
+        	logger.debug("content: "+ArticleContent);
+        else
+        	logger.debug("content: Article not valid");
         //TODO pulire articoli e levare ahref
 		return null;
 	}
