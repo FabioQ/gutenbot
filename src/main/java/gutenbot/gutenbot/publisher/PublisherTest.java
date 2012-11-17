@@ -8,17 +8,23 @@ import gutenbot.gutenbot.publisher.BlogPublisher.PostType;
 
 public class PublisherTest {
 	
-	 public static void main(String[] args) throws Exception {
+	private String xmlRpcUrl;
+	private String apiKey;
+	private String userName;
+	private String password;
+	private String blogId;
+	
+	 public static void main() throws Exception {
 		    // the url of your xmlrpc.php, typically
 		    // of the form http://your.domain.here/wordpress/xmlrpc.php
 		 	// or http://sUsername.wordpress.com/xmlrpc.php?
-		    String xmlRpcUrl = args[0];
-		    // this key is not used in my wordpress version
-		    String apiKey = args[1];
-		    String userName = args[2];
-		    String password = args[3];
-		    // in my wordpress version the blogId is "1"
-		    String blogId = args[4];
+		    String xmlRpcUrl = "http://sportsponsorizzazioni.com/"; 
+		    // this key is probably not used in wordpress version
+		    String apiKey = null;
+		    String userName = "Guten";
+		    String password = "GutenTestPassword123";
+		    // wordpress blogId is "1" on the main website, different on subdomain of same blog
+		    String blogId = "1";
 
 		    XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		    config.setServerURL(new URL(xmlRpcUrl));
