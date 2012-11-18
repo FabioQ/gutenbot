@@ -59,7 +59,7 @@ public class GutenBotTest {
 			// create parser
 			Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());
 			
-			//configuring destination (TODO info has to be estrapolated frome destination)
+			//configuring destination (TODO info has to be estrapolated from destination)
 			String destUsername = "admin";
 			String destPassword = "alonso11";
 			String destXmlrpcURL = "http://www.sportsponsorizzazioni.com/xmlrpc.php";
@@ -74,7 +74,7 @@ public class GutenBotTest {
 				contentText = parser.parse(entry.getLink());
 				if (contentText.length() > 20){
 					System.out.println("Posting an article");
-					destinationBlog.blogPublish(entry.getTitle(), contentText);
+					destinationBlog.blogPublish(entry.getTitle().getBytes("utf-8").toString(), contentText);
 				}
 			}
 		}

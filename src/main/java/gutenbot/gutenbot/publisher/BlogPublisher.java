@@ -12,7 +12,7 @@ import net.bican.wordpress.Page;
 import net.bican.wordpress.Wordpress;
 
 public class BlogPublisher {
-	
+
 	Logger logger = Logger.getLogger(BlogPublisher.class);
 	private Wordpress WP;
 	private Page post;
