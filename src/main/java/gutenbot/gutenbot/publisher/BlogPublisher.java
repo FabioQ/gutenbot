@@ -13,7 +13,7 @@ public class BlogPublisher {
 		Wordpress WP = new Wordpress("admin", "alonso11", "http://www.sportsponsorizzazioni.com/xmlrpc.php");
 	    Page post = new Page();
 	    post.setTitle("GODO");
-	    post.setDescription("PORCO DI DIO 1.7");
+	    post.setDescription("test test test");
 	    String newPostIds = WP.newPost(post, true);
 	    int newPostId = Integer.valueOf(newPostIds).intValue();
 	    Page postNow = WP.getPost(newPostId);
