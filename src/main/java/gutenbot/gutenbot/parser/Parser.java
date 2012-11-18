@@ -6,6 +6,6 @@ import gutenbot.gutenbot.dto.Article;
 
 public interface Parser {
 	
-	Article parse(String url) throws IOException;
+	String parse(String url) throws IOException;
 
 }

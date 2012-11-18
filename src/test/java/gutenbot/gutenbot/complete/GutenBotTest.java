@@ -5,6 +5,7 @@ import gutenbot.gutenbot.dispatcher.Dispatcher;
 import gutenbot.gutenbot.dto.Destination;
 import gutenbot.gutenbot.dto.Feed;
 import gutenbot.gutenbot.parser.Parser;
+import gutenbot.gutenbot.publisher.BlogPublisher;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.net.URL;
 
 import org.junit.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import redstone.xmlrpc.XmlRpcFault;
 
 import com.google.common.collect.Lists;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -26,7 +29,7 @@ public class GutenBotTest {
 	FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
 
 	@Test
-	public void test() throws IllegalArgumentException, FeedException, IOException, URISyntaxException{
+	public void test() throws IllegalArgumentException, FeedException, IOException, URISyntaxException, XmlRpcFault{
 		
 		// load configuration
 		File configurationFile = new File("domainconfigurations/quinzi.org.xml");
@@ -56,18 +59,24 @@ public class GutenBotTest {
 			// create parser
 			Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());
 			
+			//configuring destination (TODO info has to be estrapolated frome destination)
+			String destUsername = "admin";
+			String destPassword = "alonso11";
+			String destXmlrpcURL = "http://www.sportsponsorizzazioni.com/xmlrpc.php";
+			BlogPublisher destinationBlog = new BlogPublisher();
+			destinationBlog.blogConnect(destUsername, destPassword, destXmlrpcURL);
+			
 			//parse entries
 			for(Object o:f.getSyndEntryList()){
+				String contentText;
 				SyndEntry entry = (SyndEntry) o;
 				System.out.println("parsing:\t"+entry.getPublishedDate().toString()+ " - "+entry.getLink());
-				parser.parse(entry.getLink());
+				contentText = parser.parse(entry.getLink());
+				if (contentText.length() > 20){
+					System.out.println("Posting an article");
+					destinationBlog.blogPublish(entry.getTitle(), contentText);
+				}
 			}
-			
-			//TODO Update the Feed Obj to a complete version
-			
-			//TODO Creating and publishing an article
-			
-			System.out.println("publish");
 		}
 		
 		

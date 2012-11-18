@@ -15,7 +15,7 @@ public class GazzettaParser implements Parser {
 	Logger logger = Logger.getLogger(GazzettaParser.class);
 	
 	@Override
-	public Article parse(String url) throws IOException{
+	public String parse(String url) throws IOException{
         System.out.println("Fetching "+ url);
         Document doc = Jsoup.connect(url).get();
         Elements toCleanArticle = doc.select("div.first-col");
@@ -31,7 +31,7 @@ public class GazzettaParser implements Parser {
         else
         	logger.debug("content: Article not valid");
         //TODO pulire articoli e levare ahref
-		return null;
+		return ArticleContent;
 	}
 
 }

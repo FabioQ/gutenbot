@@ -1,6 +1,10 @@
 package gutenbot.gutenbot.publisher;
 
+import gutenbot.gutenbot.parser.GazzettaParser;
+
 import java.net.MalformedURLException;
+
+import org.apache.log4j.Logger;
 
 import redstone.xmlrpc.XmlRpcFault;
 
@@ -9,15 +13,24 @@ import net.bican.wordpress.Wordpress;
 
 public class BlogPublisher {
 	
-	public static void main(String[] args) throws MalformedURLException, XmlRpcFault {
-		Wordpress WP = new Wordpress("admin", "alonso11", "http://www.sportsponsorizzazioni.com/xmlrpc.php");
-	    Page post = new Page();
-	    post.setTitle("GODO");
-	    post.setDescription("PORCO DI DIO 1.7");
-	    String newPostIds = WP.newPost(post, true);
+	Logger logger = Logger.getLogger(BlogPublisher.class);
+	private Wordpress WP;
+	private Page post;
+	
+	public void blogConnect(String username, String password, String xmlrpcurl) throws MalformedURLException, XmlRpcFault {
+		//xmlrpc url template http://www.sportsponsorizzazioni.com/xmlrpc.php
+		this.WP = new Wordpress(username, password, xmlrpcurl);
+	    logger.debug("Connected to blog.");
+	}
+	
+	public void blogPublish(String articleTitle, String articleText) throws XmlRpcFault{
+		this.post = new Page();
+	    this.post.setTitle(articleTitle);
+	    this.post.setDescription(articleText);
+	    String newPostIds = this.WP.newPost(post, true);
 	    int newPostId = Integer.valueOf(newPostIds).intValue();
 	    Page postNow = WP.getPost(newPostId);
-		
+		System.out.println("Article Posted.");
 	}
 
 }
