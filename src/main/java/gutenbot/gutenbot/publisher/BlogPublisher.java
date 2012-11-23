@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 
 import org.apache.log4j.Logger;
 
+import redstone.xmlrpc.XmlRpcArray;
 import redstone.xmlrpc.XmlRpcFault;
 
 import net.bican.wordpress.Page;
@@ -23,10 +24,12 @@ public class BlogPublisher {
 	    logger.debug("Connected to blog.");
 	}
 	
-	public void blogPublish(String articleTitle, String articleText) throws XmlRpcFault{
+	public void blogPublish(String articleTitle, String articleText, String sourceDomain, String sourceAuthor, String blogCategory) throws XmlRpcFault{
+		String fullArticleContent = articleText + "<br><br><br>- Author: " + sourceAuthor + "<br>- Source: <a href=\"http://" + sourceDomain + "\" rel=\"nofollow\">"+ sourceDomain +"</a>" ;
+		//TODO use the category arg to create the XMLRPC array and select categories
 		this.post = new Page();
 	    this.post.setTitle(articleTitle);
-	    this.post.setDescription(articleText);
+	    this.post.setDescription(fullArticleContent);
 	    String newPostIds = this.WP.newPost(post, true);
 	    int newPostId = Integer.valueOf(newPostIds).intValue();
 	    Page postNow = WP.getPost(newPostId);

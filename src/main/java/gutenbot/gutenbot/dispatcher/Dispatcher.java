@@ -31,10 +31,8 @@ public class Dispatcher {
 	}
 	
 	public String getDomain() throws URISyntaxException{
-		System.out.println("Utilizzo un Feed di prova");
         Pattern p = Pattern.compile(".*?([^.]+\\.[^.]+)");
 		URI uri = new URI(feed.getFeedURL());
-		System.out.println(uri);
 		Matcher m = p.matcher(uri.getHost());
         if (m.matches()) {
             domain = m.group(1);

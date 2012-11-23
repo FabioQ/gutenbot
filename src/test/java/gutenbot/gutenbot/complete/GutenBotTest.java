@@ -55,6 +55,7 @@ public class GutenBotTest {
 			Dispatcher dispatcher = new Dispatcher();
 			dispatcher.setFeed(f);
 			System.out.println("dispatcher selected: "+dispatcher.getDomain());
+			String blogCategory = "Calcio"; //TODO this category should be part of feed detail to split feeds between categories.
 			
 			// create parser
 			Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());
@@ -74,7 +75,7 @@ public class GutenBotTest {
 				contentText = parser.parse(entry.getLink());
 				if (contentText.length() > 20){
 					System.out.println("Posting an article");
-					destinationBlog.blogPublish(entry.getTitle().getBytes("utf-8").toString(), contentText);
+					destinationBlog.blogPublish(entry.getTitle(), contentText, dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 				}
 			}
 		}
