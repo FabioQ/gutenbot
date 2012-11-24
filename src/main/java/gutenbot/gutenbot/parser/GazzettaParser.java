@@ -15,23 +15,23 @@ public class GazzettaParser implements Parser {
 	Logger logger = Logger.getLogger(GazzettaParser.class);
 	
 	@Override
-	public String parse(String url) throws IOException{
+	public Article parse(String url) throws IOException{
         System.out.println("Fetching "+ url);
         Document doc = Jsoup.connect(url).get();
+        Elements toCleanTitle = doc.select("title");
+        String title = toCleanTitle.text().replace("\n - La Gazzetta dello Sport", "");
         Elements toCleanArticle = doc.select("div.first-col");
         //System.out.println(toCleanArticle);
         Elements RawArticle = toCleanArticle.select("p.p");
+        Article currentArticle = new Article("","");
         String ArticleContent = "";
         for (Element paragraph : RawArticle) {
         	ArticleContent += paragraph.text();
         	ArticleContent += " <br> ";
         }
-        if (ArticleContent.length() > 20)	//needed almost 10characters to be a valid article, so we even skip empty
-        	logger.debug("content: "+ArticleContent);
-        else
-        	logger.debug("content: Article not valid");
-        //TODO pulire articoli e levare ahref
-		return ArticleContent;
+        currentArticle.setArticleContent(ArticleContent);
+        currentArticle.setArticleTitle(title);
+		return currentArticle;
 	}
 
 }

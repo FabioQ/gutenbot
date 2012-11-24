@@ -2,14 +2,28 @@ package gutenbot.gutenbot.dto;
 
 public class Article {
 	
-	private String articleContent;
-
+	String articleTitle;
+	String articleContent;
 	
-	public String getContent(){
-		return this.articleContent;
+	public Article(String articleTitle, String articleContent) {
+		super();
+		this.articleTitle = articleTitle;
+		this.articleContent = articleContent;
 	}
-	
-	public void setContent(String content){
-		this.articleContent = content;
+
+	public String getArticleTitle() {
+		return articleTitle;
+	}
+
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
+	}
+
+	public String getArticleContent() {
+		return articleContent;
+	}
+
+	public void setArticleContent(String articleContent) {
+		this.articleContent = articleContent;
 	}
 }

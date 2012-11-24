@@ -2,6 +2,7 @@ package gutenbot.gutenbot.complete;
 
 import gutenbot.gutenbot.common.DestinationConfiguration;
 import gutenbot.gutenbot.dispatcher.Dispatcher;
+import gutenbot.gutenbot.dto.Article;
 import gutenbot.gutenbot.dto.Destination;
 import gutenbot.gutenbot.dto.Feed;
 import gutenbot.gutenbot.parser.Parser;
@@ -66,13 +67,13 @@ public class GutenBotTest {
 			
 			//parse entries
 			for(Object o:f.getSyndEntryList()){
-				String contentText;
+				Article articleContent;
 				SyndEntry entry = (SyndEntry) o;
 				System.out.println("parsing:\t"+entry.getPublishedDate().toString()+ " - "+entry.getLink());
-				contentText = parser.parse(entry.getLink());
-				if (contentText.length() > 20){
+				articleContent = parser.parse(entry.getLink());
+				if (articleContent.getArticleContent().length() > 20){
 					System.out.println("Posting an article");
-					destinationBlog.blogPublish(entry.getTitle(), contentText, dispatcher.getDomain(), entry.getAuthor(), blogCategory);
+					destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 				}
 			}
 		}
