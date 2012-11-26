@@ -7,5 +7,6 @@ import gutenbot.gutenbot.dto.Article;
 public interface Parser {
 	
 	Article parse(String url) throws IOException;
+	Article addEnclosure(Article withoutEnclosure, String enclosure);
 
 }

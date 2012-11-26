@@ -23,7 +23,7 @@ public class GazzettaParser implements Parser {
         Elements toCleanArticle = doc.select("div.first-col");
         //System.out.println(toCleanArticle);
         Elements RawArticle = toCleanArticle.select("p.p");
-        Article currentArticle = new Article("","");
+        Article currentArticle = new Article("","","");
         String ArticleContent = "";
         for (Element paragraph : RawArticle) {
         	ArticleContent += paragraph.text();
@@ -32,6 +32,19 @@ public class GazzettaParser implements Parser {
         currentArticle.setArticleContent(ArticleContent);
         currentArticle.setArticleTitle(title);
 		return currentArticle;
+	}
+	
+	@Override
+	public Article addEnclosure(Article withoutEnclosure, String enclosure){
+		if (enclosure.length() > 1){
+			//Standard code to add an image aligned on left and with a 300px width
+			String imgCode = "<img style=\"float:left;margin:5px 4% 20px 0;\" title=\"" + withoutEnclosure.getArticleTitle() + "\" src=\""+ enclosure + "\" width=\"300px\" >";
+			//System.out.println("DEBUG imgCode: " + imgCode);
+			withoutEnclosure.setArticleContent(imgCode + withoutEnclosure.getArticleContent());
+		}
+		//TODO add enclosure to article content.
+		//System.out.println("AAAAAAAA"+enclosure);
+		return withoutEnclosure;
 	}
 
 }

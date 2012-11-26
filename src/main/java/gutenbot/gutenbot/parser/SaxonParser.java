@@ -69,4 +69,10 @@ public class SaxonParser implements Parser {
 		return null;
 	}
 
+	@Override
+	public Article addEnclosure(Article withoutEnclosure, String enclosure) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

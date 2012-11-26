@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -19,6 +21,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import redstone.xmlrpc.XmlRpcFault;
 
 import com.google.common.collect.Lists;
+import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -70,7 +73,11 @@ public class GutenBotTest {
 				Article articleContent;
 				SyndEntry entry = (SyndEntry) o;
 				System.out.println("parsing:\t"+entry.getPublishedDate().toString()+ " - "+entry.getLink());
+				//if I have any enclosure, it will be set on the article object so the parser can use it.
+				List<SyndEnclosure> articleEnclosuresList = entry.getEnclosures();
 				articleContent = parser.parse(entry.getLink());
+				//added in the parser che method able to add enclosures, it takes the first enclosure of an article, if any, and use it in the article.
+				articleContent = parser.addEnclosure(articleContent, articleEnclosuresList.get(0).getUrl());
 				if (articleContent.getArticleContent().length() > 20){
 					System.out.println("Posting an article");
 					destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
