@@ -21,7 +21,7 @@ public class SaxonParser implements Parser {
 	Logger logger = Logger.getLogger(SaxonParser.class);
 
 	@Override
-	public String parse(String articleUrl) {
+	public Article parse(String articleUrl) {
 		System.out.println("start");
 		try {
 

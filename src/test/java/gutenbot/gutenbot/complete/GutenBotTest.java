@@ -33,7 +33,7 @@ public class GutenBotTest {
 	public void test() throws IllegalArgumentException, FeedException, IOException, URISyntaxException, XmlRpcFault{
 		
 		// load configuration
-		File configurationFile = new File("domainconfigurations/quinzi.org.xml");
+		File configurationFile = new File("domainconfigurations/sportsponsorizzazioni.com.xml");
 		DestinationConfiguration configuration = new DestinationConfiguration(configurationFile);
 		if(configuration.isValid()){
 			System.out.println("configuration file:\t"+configuration.getName());
