@@ -49,8 +49,8 @@ public class GutenBotTest {
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feedLib = input.build(new XmlReader(feedSource));
 			
-			// create our feed object (TODO destination info has to be estrapolated from destination)
-			Feed f = new Feed(feedUrl, new Destination("admin", "alonso11", "http://www.sportsponsorizzazioni.com/xmlrpc.php"), Lists.newLinkedList(feedLib.getEntries()));
+			// create our feed object
+			Feed f = new Feed(feedUrl, new Destination(configuration.getDestinationUserName(), configuration.getDestinationUserPassword(), configuration.getDestinationXmlRpcUrl()), Lists.newLinkedList(feedLib.getEntries()));
 			
 			// dispatcher
 			Dispatcher dispatcher = new Dispatcher();

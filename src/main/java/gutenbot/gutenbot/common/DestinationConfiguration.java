@@ -17,6 +17,9 @@ public class DestinationConfiguration {
 	LinkedList<String> urls = new LinkedList<String>();
 	boolean valid;
 	String destinationName;
+	String destinationUserName;
+	String destinationUserPassword;
+	String destinationXmlRpcUrl;
 
 	public DestinationConfiguration(File configurationFile) {
 
@@ -33,7 +36,10 @@ public class DestinationConfiguration {
 				urls.add(url.getText());
 			}
 			
-			destinationName = ( (Element) document.selectSingleNode("/gbconfig/destination/name") ).getText();
+			destinationName = ( (Element) document.selectSingleNode("/gbconfig/destination/domain") ).getText();
+			destinationUserName = ( (Element) document.selectSingleNode("/gbconfig/destination/username") ).getText();
+			destinationUserPassword = ( (Element) document.selectSingleNode("/gbconfig/destination/password") ).getText();
+			destinationXmlRpcUrl = ( (Element) document.selectSingleNode("/gbconfig/destination/xmlrpcurl") ).getText();
 					
 			valid = true;
 		} catch (Exception e) {
@@ -53,6 +59,22 @@ public class DestinationConfiguration {
 
 	public boolean isValid() {
 		return valid;
+	}
+	
+	public String getDestinationName() {
+		return destinationName;
+	}
+	
+	public String getDestinationUserName() {
+		return destinationUserName;
+	}
+	
+	public String getDestinationUserPassword() {
+		return destinationUserPassword;
+	}
+	
+	public String getDestinationXmlRpcUrl() {
+		return destinationXmlRpcUrl;
 	}
 
 }
