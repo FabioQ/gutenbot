@@ -76,9 +76,9 @@ public class GutenBotTest {
 				//if I have any enclosure, it will be set on the article object so the parser can use it.
 				List<SyndEnclosure> articleEnclosuresList = entry.getEnclosures();
 				articleContent = parser.parse(entry.getLink());
-				//added in the parser che method able to add enclosures, it takes the first enclosure of an article, if any, and use it in the article.
-				articleContent = parser.addEnclosure(articleContent, articleEnclosuresList.get(0).getUrl());
 				if (articleContent.getArticleContent().length() > 20){
+					//added in the parser a method able to add enclosures, it takes the first enclosure of an article, if any, and use it in the article.
+					articleContent = parser.addEnclosure(articleContent, articleEnclosuresList.get(0).getUrl());
 					System.out.println("Posting an article");
 					destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 				}
