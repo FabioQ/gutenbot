@@ -68,7 +68,7 @@ public class FeedFilter {
 				
 				if(lastDate == null || entry.getPublishedDate().after(lastDate)){
 					list.add(entry);
-					setLastDate(entry.getPublishedDate());
+//					setLastDate(entry.getPublishedDate());
 					logger.debug("entry ADDED:\t"+entry.getPublishedDate().toString()+" "+entry.getUri().toString());
 				}else{
 					logger.debug("entry IGNORED:\t"+entry.getPublishedDate().toString()+" "+entry.getUri().toString());

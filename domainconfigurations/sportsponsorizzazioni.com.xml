@@ -8,6 +8,6 @@
 		<xmlrpcurl>http://www.sportsponsorizzazioni.com/xmlrpc.php</xmlrpcurl></destination>
 	<feeds>
 		<url>http://www.gazzetta.it/rss/Calcio.xml</url>
-		<!-- <url>http://xml.corriereobjects.it/rss/sport.xml</url>  -->
+		<url>http://www.gazzetta.it/rss/Formula1.xml</url>
 	</feeds>
 </gbconfig>
