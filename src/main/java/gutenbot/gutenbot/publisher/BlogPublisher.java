@@ -27,14 +27,14 @@ public class BlogPublisher {
 	public void blogPublish(String articleTitle, String articleText, String sourceDomain, String sourceAuthor, String blogCategory) throws XmlRpcFault{
 		String fullArticleContent = articleText + "<br><br><br>- Author: " + sourceAuthor + "<br>- Source: <a href=\"http://" + sourceDomain + "\" rel=\"nofollow\">"+ sourceDomain +"</a>" ;
 		//TODO use the category arg to create the XMLRPC array and select categories
-		//DONE add tags (words with 5 or more characters in the title)  -> there is no tag methos, so it will be done with an automatic tag system plugin.
+		//add tags - there is no tag methos, so it will be done with an automatic tag system plugin.
 		this.post = new Page();
 	    this.post.setTitle(articleTitle);
 	    this.post.setDescription(fullArticleContent);
 	    String newPostIds = this.WP.newPost(post, true);
 	    int newPostId = Integer.valueOf(newPostIds).intValue();
 	    Page postNow = WP.getPost(newPostId);
-		System.out.println("Article Posted.");
+		System.out.println("Article Posted.  Title=> "+ articleTitle);
 	}
 
 }
