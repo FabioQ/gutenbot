@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gbconfig>
+	<destination>
+		<domain>http://marketingsportivo.com/</domain>
+		<username>admin</username>
+		<password>alonso11</password>
+		<xmlrpcurl>http://marketingsportivo.com/xmlrpc.php</xmlrpcurl></destination>
+	<feeds>
+		<url>http://www.gazzetta.it/rss/Calcio.xml</url><url>http://www.gazzetta.it/rss/Formula1.xml</url>
+	</feeds>
+</gbconfig>
