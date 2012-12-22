@@ -57,7 +57,9 @@ public class GutenBotIframeTest {
 				}
 
 				// list feed url
-				for (String feedUrl : configuration.getFeedURLs()) {
+				for (String[] source : configuration.getFeedSources()) {
+					String feedUrl = source[0];
+					String category = source[1];
 					System.out.println("feed:\t" + feedUrl);
 
 					// create library feed object
@@ -73,12 +75,7 @@ public class GutenBotIframeTest {
 					Dispatcher dispatcher = new Dispatcher();
 					dispatcher.setFeed(f);
 					System.out.println("dispatcher selected: " + dispatcher.getDomain());
-					String blogCategory = "Sport News"; // TODO this category should
-													// be
-													// part
-													// of feed detail to split
-													// feeds
-													// between categories.
+					String blogCategory = category; //taken from the configuration file
 
 					// create parser
 					Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());
@@ -126,7 +123,7 @@ public class GutenBotIframeTest {
 								}
 								System.out.println("Posting an article");
 								System.out.println(articleContent.getArticleContent().toString());
-								destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
+								//destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 							}
 
 						} else {

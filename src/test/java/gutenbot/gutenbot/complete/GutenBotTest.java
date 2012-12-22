@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.junit.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -32,7 +33,7 @@ import com.sun.syndication.io.XmlReader;
 
 public class GutenBotTest {
 	
-	int sleepMs = 5000;
+	int sleepMs = 10000;
 
 	FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
 
@@ -56,7 +57,9 @@ public class GutenBotTest {
 				}
 
 				// list feed url
-				for (String feedUrl : configuration.getFeedURLs()) {
+				for (String[] source : configuration.getFeedSources()) {
+					String feedUrl = source[0];
+					String category = source[1];
 					System.out.println("feed:\t" + feedUrl);
 
 					// create library feed object
@@ -72,12 +75,7 @@ public class GutenBotTest {
 					Dispatcher dispatcher = new Dispatcher();
 					dispatcher.setFeed(f);
 					System.out.println("dispatcher selected: " + dispatcher.getDomain());
-					String blogCategory = "Calcio"; // TODO this category should
-													// be
-													// part
-													// of feed detail to split
-													// feeds
-													// between categories.
+					String blogCategory = category; //taken from the configuration file
 
 					// create parser
 					Parser parser = (Parser) ctx.getBean(dispatcher.getDomain());

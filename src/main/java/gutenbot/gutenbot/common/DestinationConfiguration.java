@@ -2,12 +2,14 @@ package gutenbot.gutenbot.common;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 public class DestinationConfiguration {
@@ -15,6 +17,7 @@ public class DestinationConfiguration {
 	Logger logger = Logger.getLogger(DestinationConfiguration.class);
 	File configurationFile;
 	LinkedList<String> urls = new LinkedList<String>();
+	LinkedList<String[]> sources = new LinkedList<String[]>();
 	boolean valid;
 	String destinationName;
 	String destinationUserName;
@@ -30,10 +33,12 @@ public class DestinationConfiguration {
 		SAXReader reader = new SAXReader();
 		try {
 			Document document = reader.read(new FileInputStream(configurationFile));
-			List list = document.selectNodes("/gbconfig/feeds/url");
+			List list = document.selectNodes("/gbconfig/feeds/feed");
 			for(Object o:list){
-				Element url = (Element) o;
-				urls.add(url.getText());
+				Node feed = (Node) o;
+				Element url = (Element) feed.selectNodes("url").get(0);
+				Element category = (Element) feed.selectNodes("category").get(0);
+				sources.add(new String[]{url.getText().trim(),category.getText()});
 			}
 			
 			destinationName = ( (Element) document.selectSingleNode("/gbconfig/destination/domain") ).getText();
@@ -51,6 +56,10 @@ public class DestinationConfiguration {
 
 	public LinkedList<String> getFeedURLs() {
 		return urls;
+	}
+	
+	public LinkedList<String[]> getFeedSources() {
+		return sources;
 	}
 
 	public String getName() {

@@ -7,6 +7,13 @@
 		<password>alonso11</password>
 		<xmlrpcurl>http://marketingsportivo.com/xmlrpc.php</xmlrpcurl></destination>
 	<feeds>
-		<url>http://www.gazzetta.it/rss/Calcio.xml</url><url>http://www.gazzetta.it/rss/Formula1.xml</url>
-	</feeds>
+		
+		<feed><url>
+			http://www.gazzetta.it/rss/Calcio.xml
+			</url>
+			<category>Calcio</category></feed>
+		<feed><url>
+	http://www.gazzetta.it/rss/Formula1.xml
+	</url>
+			<category>Formula1</category></feed></feeds>
 </gbconfig>
