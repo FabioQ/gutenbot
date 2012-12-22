@@ -33,7 +33,7 @@ import com.sun.syndication.io.XmlReader;
 
 public class GutenBotTest {
 	
-	int sleepMs = 10000;
+	int sleepMs = 100000;
 
 	FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
 
