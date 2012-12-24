@@ -56,6 +56,8 @@ public class GutenBotIframeTest {
 					maxDate = fr.getLastDate();
 				}
 
+				Date newMaxDate = maxDate;
+				
 				// list feed url
 				for (String[] source : configuration.getFeedSources()) {
 					String feedUrl = source[0];
@@ -94,6 +96,10 @@ public class GutenBotIframeTest {
 						if (entry.getPublishedDate().after(maxDate)) {
 
 							System.out.println("Article accepted, pubDate=" + entry.getPublishedDate().toString() + " maxDate=" + maxDate.toString());
+							
+							if (entry.getPublishedDate().after(newMaxDate)) {
+								newMaxDate = entry.getPublishedDate();
+							}
 
 							// if I have any enclosure, it will be set on the
 							// article object
@@ -133,7 +139,7 @@ public class GutenBotIframeTest {
 
 				}
 
-				fr.setLastDate(new Date());
+				fr.setLastDate(newMaxDate);
 
 			}
 

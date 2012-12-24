@@ -56,6 +56,8 @@ public class GutenBotTest {
 					maxDate = fr.getLastDate();
 				}
 
+				Date newMaxDate = maxDate;
+				
 				// list feed url
 				for (String[] source : configuration.getFeedSources()) {
 					String feedUrl = source[0];
@@ -94,6 +96,10 @@ public class GutenBotTest {
 
 							System.out.println("Article accepted, pubDate=" + entry.getPublishedDate().toString() + " maxDate=" + maxDate.toString());
 
+							if (entry.getPublishedDate().after(newMaxDate)) {
+								newMaxDate = entry.getPublishedDate();
+							}
+							
 							// if I have any enclosure, it will be set on the
 							// article object
 							// so the parser can use it.
@@ -118,7 +124,7 @@ public class GutenBotTest {
 
 				}
 
-				fr.setLastDate(new Date());
+				fr.setLastDate(newMaxDate);
 
 			}
 
