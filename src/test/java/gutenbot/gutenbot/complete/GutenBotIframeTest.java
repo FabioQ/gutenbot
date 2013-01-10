@@ -129,7 +129,7 @@ public class GutenBotIframeTest {
 								}
 								System.out.println("Posting an article");
 								System.out.println(articleContent.getArticleContent().toString());
-								destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
+								//destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 							}
 
 						} else {
