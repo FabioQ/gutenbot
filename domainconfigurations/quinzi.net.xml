@@ -2,19 +2,18 @@
 
 <gbconfig>
 	<destination>
-		<domain>http://sportsponsorizzazioni.com/</domain>
+		<domain>http://quinzi.net/</domain>
 		<username>admin</username>
-		<password>alonso11</password>
-		<xmlrpcurl>http://www.sportsponsorizzazioni.com/xmlrpc.php</xmlrpcurl></destination>
+		<password>putoKABIN</password>
+		<xmlrpcurl>http://quinzi.net/xmlrpc.php</xmlrpcurl></destination>
 	<feeds>
-		
 		
 		<feed><url>
 			http://www.gazzetta.it/rss/Calcio.xml
 			</url>
 			<category>Calcio</category></feed>
 		<feed><url>
-			http://www.gazzetta.it/rss/Formula1.xml
-			</url>
+	http://www.gazzetta.it/rss/Formula1.xml
+	</url>
 			<category>Formula1</category></feed></feeds>
 </gbconfig>
