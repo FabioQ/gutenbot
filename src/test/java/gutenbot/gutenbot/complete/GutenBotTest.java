@@ -114,7 +114,7 @@ public class GutenBotTest {
 								// it in the article.
 								articleContent = parser.addEnclosure(articleContent, articleEnclosuresList.get(0).getUrl());
 								System.out.println("Posting an article");
-								//destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
+								destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 							}
 
 						} else {
