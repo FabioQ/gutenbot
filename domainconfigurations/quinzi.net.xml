@@ -15,5 +15,12 @@
 		<feed><url>
 	http://www.gazzetta.it/rss/Formula1.xml
 	</url>
-			<category>Formula1</category></feed></feeds>
+			<category>Formula1</category></feed>
+        <feed>
+            <url>
+                http://rss.feedsportal.com/c/32275/f/438637/index.rss
+            </url>
+            <category>Calcio</category>
+        </feed>
+    </feeds>
 </gbconfig>
