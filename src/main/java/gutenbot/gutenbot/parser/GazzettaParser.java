@@ -1,12 +1,9 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
-import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -16,7 +13,7 @@ public class GazzettaParser extends GenericParser {
 	Logger logger = Logger.getLogger(GazzettaParser.class);
 
     @Override
-    Article doParse(Document doc) {
+    Article doParse(Document doc, SyndEntry entry) {
         Elements toCleanTitle = doc.select("title");
         String title = toCleanTitle.text().replace("\n - La Gazzetta dello Sport", "");
         Elements toCleanArticle = doc.select("div.first-col");

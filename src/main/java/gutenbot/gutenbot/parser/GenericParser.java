@@ -1,11 +1,10 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -18,10 +17,11 @@ import java.io.IOException;
  */
 public abstract class GenericParser implements Parser{
 
-    public Article parse(String url) throws IOException, ArticleNotFoundException{
-        System.out.println("Fetching " + url);
+    public Article parse(SyndEntry entry) throws IOException, ArticleNotFoundException{
+        System.out.println("Fetching " + entry);
         try {
-            return doParse(Jsoup.connect(url).get());
+            Document document = Jsoup.connect(entry.getLink()).get();
+            return doParse(document,entry);
         } catch (HttpStatusException e) {
             throw new ArticleNotFoundException("Problem fetching article...");
         } catch (IOException e) {
@@ -29,6 +29,6 @@ public abstract class GenericParser implements Parser{
         }
     }
 
-    abstract Article doParse(Document doc);
+    abstract Article doParse(Document doc, SyndEntry entry);
 
 }

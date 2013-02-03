@@ -1,5 +1,6 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
 
 import java.io.BufferedReader;
@@ -21,12 +22,12 @@ public class SaxonParser implements Parser {
 	Logger logger = Logger.getLogger(SaxonParser.class);
 
 	@Override
-	public Article parse(String articleUrl) {
+	public Article parse(SyndEntry articleUrl) {
 		System.out.println("start");
 		try {
 
 			System.out.println(articleUrl);
-			URL url1 = new URL(articleUrl);
+			URL url1 = new URL(articleUrl.getLink());
 			HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
 			conn.addRequestProperty("User-Agent", "Mozilla/5.0 " + "(Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) " + "Gecko/20061204 Firefox/2.0.0.1");
 			// build a JDOM tree from a SAX stream provided by tagsoup

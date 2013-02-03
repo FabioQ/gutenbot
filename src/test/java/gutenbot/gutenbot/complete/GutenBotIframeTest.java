@@ -107,7 +107,7 @@ public class GutenBotIframeTest {
 							// so the parser can use it.
 							List<SyndEnclosure> articleEnclosuresList = entry.getEnclosures();
                             try {
-                                articleContent = parser.parse(entry.getLink());
+                                articleContent = parser.parse(entry);
                             } catch (ArticleNotFoundException e) {
                                 System.out.println("Error: "+e.getErrorDescription());
                                 break;
@@ -135,7 +135,7 @@ public class GutenBotIframeTest {
 								}
 								System.out.println("Posting an article");
 								System.out.println(articleContent.getArticleContent().toString());
-								destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
+							//	destinationBlog.blogPublish(articleContent.getArticleTitle(), articleContent.getArticleContent(), entry.getPublishedDate(), dispatcher.getDomain(), entry.getAuthor(), blogCategory);
 							}
 
 						} else {

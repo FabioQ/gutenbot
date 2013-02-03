@@ -8,6 +8,6 @@
 
 	<bean id="corriereobjects.it" class="gutenbot.gutenbot.parser.CorriereParser"></bean>
 	<bean id="motosprint.it" class="gutenbot.gutenbot.parser.MotosprintParser"></bean>
-    <bean id="repubblica.it" class="gutenbot.gutenbot.parser.RepubblicaParser"></bean>
+    <bean id="feedsportal.com" class="gutenbot.gutenbot.parser.RepubblicaParser"></bean>
 
 </beans>

@@ -1,12 +1,12 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,16 +14,25 @@ import java.io.IOException;
  * Date: 03/02/13
  * Time: 17:41
  */
-public class RepubblicaParser implements Parser{
+public class RepubblicaParser extends GenericParser{
+
     @Override
-    public Article parse(String url) throws IOException {
-        System.out.println("Fetching "+ url);
-        Document doc = Jsoup.connect(url).get();
+    Article doParse(Document doc, SyndEntry entry) {
         Elements toCleanTitle = doc.select("title");
         Article currentArticle = new Article("","","");
 
         String title = toCleanTitle.text().replace(" - Repubblica.it", "");
-        /*Elements toCleanArticle = doc.select("div.first-col");
+        String fullText = doc.toString();
+        List<String> lines = Arrays.asList(fullText.split("\n"));
+        //TODO: What to do? use SyndEntryObject?
+/*         for (String line : lines) {
+            if (line.contains("<!-- inizio TESTO -->")) {
+                System.out.println(line);
+
+            }
+        }
+       System.out.println(fullText);
+        Elements toCleanArticle = doc.select("div.first-col");
         //System.out.println(toCleanArticle);
         Elements RawArticle = toCleanArticle.select("p.p");
 
@@ -34,6 +43,7 @@ public class RepubblicaParser implements Parser{
         }
         currentArticle.setArticleContent(ArticleContent);*/
         currentArticle.setArticleTitle(title);
+        System.out.println("The title is:"+ title);
         return currentArticle;
     }
 

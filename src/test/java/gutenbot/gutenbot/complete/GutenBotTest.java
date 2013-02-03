@@ -106,7 +106,7 @@ public class GutenBotTest {
 							// so the parser can use it.
 							List<SyndEnclosure> articleEnclosuresList = entry.getEnclosures();
                             try {
-                                articleContent = parser.parse(entry.getLink());
+                                articleContent = parser.parse(entry);
                             } catch (ArticleNotFoundException e) {
                                 System.out.println("Error: "+e.getErrorDescription());
                                 break;

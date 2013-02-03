@@ -1,5 +1,6 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
 
 import java.io.IOException;
@@ -10,36 +11,34 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class MotosprintParser implements Parser {
+public class MotosprintParser extends GenericParser {
 
 	Logger logger = Logger.getLogger(MotosprintParser.class);
-	
-	@Override
-	public Article parse(String url) throws IOException{
-        System.out.println("Fetching "+ url);
-        Document doc = Jsoup.connect(url).get();
+
+    @Override
+    Article doParse(Document doc, SyndEntry entry) {
         Elements toCleanTitle = doc.select("h1.tit_Article");
-        
+
         //String title = toCleanTitle.text().replace(" - Motosprint", "");
         String title = toCleanTitle.text();
         //System.out.println("PARSED TITLE: " + title);
-        
+
         Elements toCleanArticle = doc.select("div.txt_Article");
         //System.out.println("TOCLEAN ARTICLE: " + toCleanArticle);
         Elements RawArticle = toCleanArticle.select("p");
         Article currentArticle = new Article("","","");
         String ArticleContent = "";
         for (Element paragraph : RawArticle) {
-        	ArticleContent += paragraph.text();
-        	ArticleContent += " <br> ";
+            ArticleContent += paragraph.text();
+            ArticleContent += " <br> ";
         }
         currentArticle.setArticleContent(ArticleContent);
         currentArticle.setArticleTitle(title);
         //System.out.println("ARTICLE CONTENT: " + ArticleContent);
-		return currentArticle;
-	}
-	
-	@Override
+        return currentArticle;
+    }
+
+    @Override
 	public Article addEnclosure(Article withoutEnclosure, String enclosure){
 		if (enclosure.length() > 1){
 			//Standard code to add an image aligned on left and with a 300px width

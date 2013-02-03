@@ -1,11 +1,12 @@
 package gutenbot.gutenbot.parser;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import gutenbot.gutenbot.dto.Article;
 
 public class CorriereParser implements Parser {
 
 	@Override
-	public Article parse(String url) {
+	public Article parse(SyndEntry entry) {
 		System.out.println("corriere!");
 		return null;
 	}
