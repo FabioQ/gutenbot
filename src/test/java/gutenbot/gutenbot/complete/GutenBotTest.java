@@ -8,6 +8,7 @@ import gutenbot.gutenbot.dto.Destination;
 import gutenbot.gutenbot.dto.Feed;
 import gutenbot.gutenbot.feed.FeedRegister;
 import gutenbot.gutenbot.feed.FileFeedRegister;
+import gutenbot.gutenbot.parser.ArticleNotFoundException;
 import gutenbot.gutenbot.parser.Parser;
 import gutenbot.gutenbot.publisher.BlogPublisher;
 
@@ -104,8 +105,13 @@ public class GutenBotTest {
 							// article object
 							// so the parser can use it.
 							List<SyndEnclosure> articleEnclosuresList = entry.getEnclosures();
-							articleContent = parser.parse(entry.getLink());
-							if (articleContent.getArticleContent().length() > 20) {
+                            try {
+                                articleContent = parser.parse(entry.getLink());
+                            } catch (ArticleNotFoundException e) {
+                                System.out.println("Error: "+e.getErrorDescription());
+                                break;
+                            }
+                            if (articleContent.getArticleContent().length() > 20) {
 								// added in the parser a method able to add
 								// enclosures, it
 								// takes the first enclosure of an article, if

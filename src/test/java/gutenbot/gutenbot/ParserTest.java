@@ -1,5 +1,6 @@
 package gutenbot.gutenbot;
 
+import gutenbot.gutenbot.parser.ArticleNotFoundException;
 import gutenbot.gutenbot.parser.Parser;
 import gutenbot.gutenbot.parser.SaxonParser;
 
@@ -12,7 +13,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class ParserTest {
 	
 	@Test
-	public void testParsers() throws BeansException, IOException {
+	public void testParsers() throws BeansException, IOException, ArticleNotFoundException {
 		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
 		Parser gazzetta = (Parser) ctx.getBean("motosprint.it");
 		gazzetta.parse("http://www.motosprint.it/sbk/2013/01/03-7979/SBK%3A+Dal+2014+la+rivoluzione+della+Dorna");

@@ -29,7 +29,7 @@ public class RepubblicaParserTest {
     }
 
     @Test
-    public void testParse() throws Exception {
+    public void testParse() throws Exception, ArticleNotFoundException {
         FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("resources/applicationContext.xml");
         Parser gazzetta = (Parser) ctx.getBean("repubblica.it");
         Article article = gazzetta.parse("http://www.repubblica.it/sport/formulauno/2013/02/03/news/red_bull-51870719/");
