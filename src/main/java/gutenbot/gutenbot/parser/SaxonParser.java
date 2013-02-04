@@ -26,7 +26,7 @@ public class SaxonParser implements Parser {
 		System.out.println("start");
 		try {
 
-			System.out.println(articleUrl);
+			System.out.println("link "+articleUrl.getLink());
 			URL url1 = new URL(articleUrl.getLink());
 			HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
 			conn.addRequestProperty("User-Agent", "Mozilla/5.0 " + "(Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) " + "Gecko/20061204 Firefox/2.0.0.1");
@@ -47,15 +47,19 @@ public class SaxonParser implements Parser {
 
 			System.out.println("carico il transformer");
 			XSLTransformer transformer = new XSLTransformer("resources/test.xsl");
-			System.out.println("trasformo");
+            System.out.println("doc pulito");
+            outputter.output(doc, System.out);
 
-			Document out = transformer.transform(doc);
+            System.out.println("trasformo");
+            Document out = transformer.transform(doc);
+            outputter.output(out, System.out);
 
-			try {
-				outputter.output(out, System.out);
-			} catch (IOException e) {
-				System.err.println(e);
-			}
+            XSLTransformer transformer2 = new XSLTransformer("resources/test2.xsl");
+            System.out.println("trasformo2");
+            Document out2 = transformer2.transform(out);
+            outputter.output(out2, System.out);
+
+
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
